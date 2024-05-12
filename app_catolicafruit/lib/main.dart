@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app_catolicafruit/pages/splash_screen.page.dart';
+import 'package:app_catolicafruit/pages/splash_screen_page.dart';
 
 void main() {
   runApp(const MyApp());
