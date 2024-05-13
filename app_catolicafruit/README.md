@@ -1,4 +1,6 @@
-
+<div align="center">
+  <img src="images/logoPrincipal.png" alt="Logo" height="120" width="120">
+</div>  
 # Hortfruit App
 
 ## Descrição
