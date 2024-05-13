@@ -5,7 +5,7 @@ class Comp{
 
   String logoPrincipal = "images/logoPrincipal.png";
 
-  Color corPrincipal = Color.fromARGB(255, 79, 220, 69);
+  Color corPrincipal = Color.fromRGBO(79, 220, 69,1);
 
     String email = "email";
   String senha = "senha";

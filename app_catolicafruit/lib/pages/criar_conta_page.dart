@@ -30,6 +30,12 @@ class _CriarContaPageState extends State<CriarContaPage> {
           ),
           centerTitle: true,
           backgroundColor: Comp().corPrincipal,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white,),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
         ),
         body: Center(
           child: Column(
@@ -44,8 +50,26 @@ class _CriarContaPageState extends State<CriarContaPage> {
                 child: TextField(
                   controller: nomeController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.abc),
+                    prefixIcon: Icon(Icons.abc, color: Comp().corPrincipal),
                     label: const Text("Informe o seu nome"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.horizontal(),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 29,
+              ),
+              SizedBox(
+                width: largura - 40,
+                height: 50,
+                child: TextField(
+                  controller: nomeController,
+                  decoration: InputDecoration(
+                    prefixIcon:
+                        Icon(Icons.alternate_email, color: Comp().corPrincipal),
+                    label: const Text("Informe o seu e-mail"),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.horizontal(),
                     ),
@@ -61,7 +85,10 @@ class _CriarContaPageState extends State<CriarContaPage> {
                 child: TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.phone),
+                    prefixIcon: Icon(
+                      Icons.phone,
+                      color: Comp().corPrincipal,
+                    ),
                     label: Text("Informe o seu numero de telefone"),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.horizontal(),
@@ -101,30 +128,13 @@ class _CriarContaPageState extends State<CriarContaPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 29,
-              ),
-              SizedBox(
-                width: largura - 50,
-                height: 50,
-                child: TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.account_circle),
-                    label: const Text("Enviar sua foto"),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.horizontal(),
-                    ),
-                  ),
-                ),
-              ),
 
               SizedBox(
                 height: 29,
               ),
               ElevatedButton(
                 child: Text(
-                  "Criar Conta e Entrar",
+                  "Cadastrar",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -135,7 +145,7 @@ class _CriarContaPageState extends State<CriarContaPage> {
                         borderRadius: BorderRadius.circular(10.0)),
                     backgroundColor: Comp().corPrincipal,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 16)),
+                        horizontal: 100, vertical: 16)),
                 onPressed: () async {
                   try {
                     SharedPreferences pref =
