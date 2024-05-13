@@ -1,6 +1,7 @@
 <div align="center">
   <img src="images/logoPrincipalMarkdown.jpg" alt="Logo" height="140" width="140">
 </div>  
+
 # Hortfruit App
 
 ## Descrição
