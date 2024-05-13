@@ -1,6 +1,7 @@
 import 'package:app_catolicafruit/pages/criar_conta_page.dart';
 import 'package:app_catolicafruit/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:app_catolicafruit/shared/comp.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,6 +23,11 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Image.asset(
+                Comp().logoPrincipal,
+                width: 300, 
+                height: 270
+              ),
               Padding(
                   padding: const EdgeInsets.all(30.0),
                   child: SizedBox(
@@ -32,9 +38,9 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         label: const Text("Digite o seu e-mail") ,
                         border: OutlineInputBorder(borderRadius: BorderRadius.horizontal()),
-                        prefixIcon: const Padding(
+                        prefixIcon: Padding(
                           padding: EdgeInsets.only(top: 1),
-                          child: Icon(Icons.alternate_email_rounded, color: Colors.green
+                          child: Icon(Icons.alternate_email_rounded, color: Comp().corPrincipal
                           ),
                           ),
                         ),
@@ -51,9 +57,9 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         label: const Text("Digite a sua senha"),
                         border: const OutlineInputBorder(borderRadius: BorderRadius.horizontal()),
-                        prefixIcon: const Padding(
+                        prefixIcon: Padding(
                           padding: EdgeInsets.only(top: 1),
-                          child: Icon(Icons.password, color: Colors.green),
+                          child: Icon(Icons.password, color: Comp().corPrincipal),
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -86,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)
                         ),
-                        backgroundColor: Colors.green,
+                        backgroundColor: Comp().corPrincipal,
                         padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16)
                       ) ,
                       onPressed: (){
@@ -114,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)
                         ),
-                        backgroundColor: Colors.green,
+                        backgroundColor: Comp().corPrincipal,
                         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 16)
                       ) ,
               ),

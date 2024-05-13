@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:app_catolicafruit/pages/login_page.dart';
+import 'package:app_catolicafruit/shared/comp.dart';
 
 class SpalshScreenPage extends StatefulWidget {
   const SpalshScreenPage({super.key});
@@ -15,7 +16,7 @@ class _SpalshScreenPageState extends State<SpalshScreenPage> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -27,21 +28,35 @@ class _SpalshScreenPageState extends State<SpalshScreenPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold( 
         backgroundColor: Colors.white,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                'Seja bem vindo',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.green,
-                fontSize: 15,
+              Image.asset(
+                Comp().logoPrincipal,
+                height: 200,
+                width: 200,
               ),
-              ),
+              SizedBox(
+                height: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                'Seja bem-vindo,\n ao nosso hortFruit! =)\n ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Comp().corPrincipal,
+                  fontSize: 15,
+                      ),
+                    ),
+                  ],
+                  ),
+              )
             ],
             ) 
         ),
