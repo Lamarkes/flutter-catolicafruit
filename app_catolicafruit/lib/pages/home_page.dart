@@ -3,15 +3,15 @@ import 'package:app_catolicafruit/models/legumes_modelo.dart';
 import 'package:app_catolicafruit/pages/info_sec_page.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:flutter/material.dart';
-import 'package:app_catolicafruit/models/secoes_modelo.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../shared/comp.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -26,89 +26,104 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var largura = MediaQuery.of(context).size.width;
-
-    List<Secoes> secoes = [
-      Secoes(
-          nomeSecao: "Frutas Disponiveis",
-          frutas: Fruta(nome: "Maça", qtdeDeFrutas: 20),
-          legumes: Legume(nome: "Pepino", qtdeDeLegumes: 10),
-          aberto: true),
-      Secoes(
-          nomeSecao: "Legumes Disponiveis",
-          frutas: Fruta(nome: "Maça", qtdeDeFrutas: 20),
-          legumes: Legume(nome: "Pepino", qtdeDeLegumes: 10),
-          aberto: false),
-    ];
-
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
+    
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
-          iconTheme: IconThemeData(
-            color: Comp().corPrincipal,
-          ),
-          title: Text(
-            'Seções',
-            style: TextStyle(color: Colors.white),
-          ),
-          centerTitle: true,
-          backgroundColor: Comp().corPrincipal,
         ),
-        body: Center(
-          child: SizedBox(
-            width: largura - 30,
-            child: ListView.separated(
-              separatorBuilder: (_, __) => SizedBox(height: 3),
-              itemCount: secoes.length,
-              itemBuilder: (_, index) => Container(
-                height: 80,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF6F6F6),
-                  borderRadius: BorderRadius.circular(8),
+        iconTheme: IconThemeData(
+          color: Comp().corPrincipal,
+        ),
+        title: Text(
+          'Seções',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Comp().corPrincipal,
+      ),
+      body: Center(
+        child: SizedBox(
+          width: largura - 30,
+          child: ListView.separated(
+            separatorBuilder: (_, __) => SizedBox(height: 3),
+            itemCount: 2,
+            itemBuilder: (_, index) => Container(
+              height: 80,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Color(0xFFF6F6F6),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ListTile(
+                onTap: () {
+                  // Implement your logic here
+                },
+                leading: Icon(
+                  Icons.add_shopping_cart_outlined,
+                  color: Comp().corPrincipal,
                 ),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                InfoSecPage(secoes: secoes[index])));
-                  },
-                  leading: Icon(
-                    Icons.add_shopping_cart_outlined,
-                    color: Comp().corPrincipal,
-                  ),
-                  title: Text(
-                    secoes[index].nomeSecao!,
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
+                title: Text(
+                  index == 0 ? 'Frutas Disponíveis' : 'Legumes Disponíveis',
+                  style: TextStyle(
+                    fontSize: 24,
                   ),
                 ),
               ),
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _indiceAtual,
-          onTap: onTabTapped,
-          selectedItemColor: Comp().corPrincipal, // Alteração aqui
-          unselectedItemColor: Colors.grey, // Alteração opcional
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), label: "Minha conta"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_basket), label: "Meus pedidos"),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
+            )
           ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          child: GNav(
+            rippleColor: Colors.white.withOpacity(0.6),
+            hoverColor: const Color.fromARGB(255, 197, 76, 76),
+            haptic: true,
+            tabBorderRadius: 15,
+            tabActiveBorder: Border.all(color: Colors.green, width: 2),
+            tabBorder: Border.all(color: Colors.green, width: 2),
+            tabShadow: [
+              BoxShadow(color: Colors.white.withOpacity(0.5), blurRadius: 8)
+            ],
+            curve: Curves.easeOutExpo,
+            duration: Duration(milliseconds: 900),
+            gap: 8,
+            color: Colors.green, // Alterado para branco
+            activeColor: Colors.green, // Alterado para verde
+            iconSize: 24,
+            tabBackgroundColor: Colors.white.withOpacity(0.1),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            tabs: [
+              GButton(
+                icon: Icons.shopping_basket,
+                text: 'Seções',
+                
+              ),
+              GButton(
+                icon: Icons.person,
+                text: 'Meu perfil',
+              ),
+            ],
+            selectedIndex: _indiceAtual,
+            onTabChange: onTabTapped,
+          ),
         ),
       ),
     );
