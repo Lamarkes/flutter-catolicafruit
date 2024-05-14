@@ -2,7 +2,6 @@ import 'package:app_catolicafruit/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:app_catolicafruit/pages/home_page.dart';
 
 class CriarContaPage extends StatefulWidget {
   const CriarContaPage({super.key});

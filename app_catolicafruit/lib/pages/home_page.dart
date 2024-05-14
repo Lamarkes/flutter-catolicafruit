@@ -1,5 +1,6 @@
 import 'package:app_catolicafruit/models/frutas_modelo.dart';
 import 'package:app_catolicafruit/models/legumes_modelo.dart';
+import 'package:app_catolicafruit/pages/catalogo_page.dart';
 import 'package:app_catolicafruit/pages/info_sec_page.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,33 @@ class _HomePageState extends State<HomePage> {
   void onTabTapped(int index) {
     setState(() {
       _indiceAtual = index;
+      if (index == 1) { // Índice 1 corresponde ao ícone do carrinho
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CatalogoPage(
+              frutas: frutasDisponiveis, 
+              legumes: legumesDisponiveis
+            ),
+          ),
+        );
+      }
     });
   }
+
+  List<Fruta> frutasDisponiveis = [
+    Fruta(nome: 'Maçã', qtdeDeFrutas: 10, preco: 2.5),
+    Fruta(nome: 'Banana', qtdeDeFrutas: 15, preco: 1.8),
+    Fruta(nome: 'Morango', qtdeDeFrutas: 8, preco: 4.0),
+    
+  ];
+
+  List<Legume> legumesDisponiveis = [
+    Legume(nome: 'Tomate', qtdeDeLegumes: 20, preco: 3.2),
+    Legume(nome: 'Alface', qtdeDeLegumes: 12, preco: 2.0),
+    Legume(nome: 'Cenoura', qtdeDeLegumes: 16, preco: 2.5),
+    
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,42 +68,73 @@ class _HomePageState extends State<HomePage> {
           color: Comp().corPrincipal,
         ),
         title: Text(
-          'Seções',
+          'FreshFruit',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         backgroundColor: Comp().corPrincipal,
       ),
-      body: Center(
-        child: SizedBox(
-          width: largura - 30,
-          child: ListView.separated(
-            separatorBuilder: (_, __) => SizedBox(height: 3),
-            itemCount: 2,
-            itemBuilder: (_, index) => Container(
-              height: 80,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Color(0xFFF6F6F6),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: ListTile(
-                onTap: () {
-                  // Implement your logic here
-                },
-                leading: Icon(
-                  Icons.add_shopping_cart_outlined,
-                  color: Comp().corPrincipal,
-                ),
-                title: Text(
-                  index == 0 ? 'Frutas Disponíveis' : 'Legumes Disponíveis',
-                  style: TextStyle(
-                    fontSize: 24,
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Espaçamento entre AppBar e o conteúdo
+            Container(
+              color: Comp().corPrincipal.withOpacity(0.02),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Column(
+                children: [
+                  Image.asset(Comp().logoPrincipal, width: 300, height: 270),
+                  Text(
+                    'Seja bem-vindo!',
+                    style: TextStyle(
+                      color: Colors.green[900],
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Explore nossos produtos e encontre o que você precisa.',
+                    style: TextStyle(
+                      color: Colors.green[900],
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
-          ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CatalogoPage(
+                        frutas: frutasDisponiveis, legumes: legumesDisponiveis),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue, 
+              ),
+              child: Text('Catálogo'),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green, 
+              ),
+              child: Text('Lista de Nossos Produtos'),
+            ),
+            SizedBox(height: 20),
+          ],
         ),
       ),
       bottomNavigationBar: Container(
@@ -91,10 +148,10 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 18),
           child: GNav(
             rippleColor: Colors.white.withOpacity(0.6),
-            hoverColor: const Color.fromARGB(255, 197, 76, 76),
+            hoverColor: Colors.white.withOpacity(0.1),
             haptic: true,
             tabBorderRadius: 15,
             tabActiveBorder: Border.all(color: Colors.green, width: 2),
@@ -105,17 +162,20 @@ class _HomePageState extends State<HomePage> {
             curve: Curves.easeOutExpo,
             duration: Duration(milliseconds: 900),
             gap: 18,
-            color: Colors.green, // Alterado para branco
-            activeColor: Colors.white, // Alterado para verde
-            iconSize: 24,
+            color: Colors.green,
+            activeColor: Colors.white, 
+            iconSize: 20,
             tabBackgroundColor: Colors.green.withOpacity(1.0),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             tabs: [
               GButton(
-                icon: Icons.shopping_basket,
-                text: 'Seções',
-                
+                icon: Icons.home_outlined,
+                text: 'Página Inicial',
               ),
+              GButton(
+                icon: Icons.shopping_bag_outlined, 
+                text: 'Catálogo'
+                ),
               GButton(
                 icon: Icons.person,
                 text: 'Meu perfil',
