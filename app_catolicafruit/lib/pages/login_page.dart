@@ -1,4 +1,5 @@
 import 'package:app_catolicafruit/pages/criar_conta_page.dart';
+import 'package:app_catolicafruit/pages/fale_conosco_page.dart';
 import 'package:app_catolicafruit/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
@@ -123,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const CriarContaPage()),
+                      builder: (context) => const FaleConoscoPage()),
                 );
               },
               child: Text(

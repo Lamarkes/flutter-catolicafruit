@@ -1,3 +1,4 @@
+import 'package:app_catolicafruit/models/usuario_modelo.dart';
 import 'package:app_catolicafruit/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
@@ -12,8 +13,10 @@ class CriarContaPage extends StatefulWidget {
 }
 
 class _CriarContaPageState extends State<CriarContaPage> {
+  late Usuario usuario;
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
+  TextEditingController telefoneController = TextEditingController();
   TextEditingController nomeController = TextEditingController();
   bool _passwordVisible = false;
   @override
@@ -84,6 +87,7 @@ class _CriarContaPageState extends State<CriarContaPage> {
                 width: largura - 40,
                 height: 50,
                 child: TextFormField(
+                  controller: telefoneController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.phone,
@@ -153,9 +157,12 @@ class _CriarContaPageState extends State<CriarContaPage> {
 
                     pref.setString(Comp().email, emailController.text);
                     pref.setString(Comp().senha, senhaController.text);
+                    usuario.nome = nomeController.text;
+                    usuario.email = emailController.text;
+                    usuario.telefone = telefoneController.text;
 
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   } catch (Exception) {}
                 },
               ),

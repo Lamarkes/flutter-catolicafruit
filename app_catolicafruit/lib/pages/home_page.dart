@@ -1,6 +1,6 @@
 import 'package:app_catolicafruit/models/frutas_modelo.dart';
 import 'package:app_catolicafruit/models/legumes_modelo.dart';
-import 'package:app_catolicafruit/pages/info_sec_page.dart';
+import 'package:app_catolicafruit/pages/perfil_page.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.green, // Alterado para branco
             activeColor: Colors.white, // Alterado para verde
             iconSize: 24,
-            tabBackgroundColor: Colors.green.withOpacity(1.5),
+            tabBackgroundColor: Colors.green,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             tabs: [
               GButton(
@@ -119,6 +119,9 @@ class _HomePageState extends State<HomePage> {
               GButton(
                 icon: Icons.person,
                 text: 'Meu perfil',
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PerfilPage()));
+                },
               ),
             ],
             selectedIndex: _indiceAtual,
