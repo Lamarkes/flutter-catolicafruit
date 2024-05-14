@@ -1,7 +1,8 @@
 import 'package:app_catolicafruit/models/frutas_modelo.dart';
 import 'package:app_catolicafruit/models/legumes_modelo.dart';
 import 'package:app_catolicafruit/pages/catalogo_page.dart';
-import 'package:app_catolicafruit/pages/info_sec_page.dart';
+import 'package:app_catolicafruit/pages/listagem_produtos_page.dart';
+import 'package:app_catolicafruit/pages/login_page.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -21,33 +22,42 @@ class _HomePageState extends State<HomePage> {
   void onTabTapped(int index) {
     setState(() {
       _indiceAtual = index;
-      if (index == 1) { // Índice 1 corresponde ao ícone do carrinho
+      if (index == 1) {
+        // Índice 1 corresponde ao ícone do carrinho
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => CatalogoPage(
-              frutas: frutasDisponiveis, 
-              legumes: legumesDisponiveis
-            ),
+                frutas: frutasDisponiveis, legumes: legumesDisponiveis),
           ),
         );
       }
     });
   }
 
-  List<Fruta> frutasDisponiveis = [
-    Fruta(nome: 'Maçã', qtdeDeFrutas: 10, preco: 2.5),
-    Fruta(nome: 'Banana', qtdeDeFrutas: 15, preco: 1.8),
-    Fruta(nome: 'Morango', qtdeDeFrutas: 8, preco: 4.0),
-    
+  List<Fruta> todasFrutas = [
+    Fruta(nome: 'Maçã', qtdeDeFrutas: 10, preco: 2.5, disponivel: true),
+    Fruta(nome: 'Banana', qtdeDeFrutas: 15, preco: 1.8, disponivel: true),
+    Fruta(nome: 'Morango', qtdeDeFrutas: 8, preco: 4.0, disponivel: false),
   ];
 
-  List<Legume> legumesDisponiveis = [
-    Legume(nome: 'Tomate', qtdeDeLegumes: 20, preco: 3.2),
-    Legume(nome: 'Alface', qtdeDeLegumes: 12, preco: 2.0),
-    Legume(nome: 'Cenoura', qtdeDeLegumes: 16, preco: 2.5),
-    
+  List<Legume> todosLegumes = [
+    Legume(nome: 'Tomate', qtdeDeLegumes: 20, preco: 3.2, disponivel: true),
+    Legume(nome: 'Alface', qtdeDeLegumes: 12, preco: 2.0, disponivel: false),
+    Legume(nome: 'Cenoura', qtdeDeLegumes: 16, preco: 2.5, disponivel: true),
   ];
+
+  List<Fruta> frutasDisponiveis = [];
+  List<Legume> legumesDisponiveis = [];
+
+  @override
+  void initState() {
+    super.initState();
+    frutasDisponiveis =
+        todasFrutas.where((fruta) => fruta.disponivel == true).toList();
+    legumesDisponiveis =
+        todosLegumes.where((legume) => legume.disponivel == true).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +67,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const LoginPage()));
           },
           icon: Icon(
             Icons.arrow_back,
@@ -120,16 +131,24 @@ class _HomePageState extends State<HomePage> {
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Colors.blue, 
+                backgroundColor: Colors.blue,
               ),
               child: Text('Catálogo'),
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListagemProdutosPage(
+                        frutas: todasFrutas, legumes: todosLegumes),
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Colors.green, 
+                backgroundColor: Colors.green,
               ),
               child: Text('Lista de Nossos Produtos'),
             ),
@@ -163,7 +182,7 @@ class _HomePageState extends State<HomePage> {
             duration: Duration(milliseconds: 900),
             gap: 18,
             color: Colors.green,
-            activeColor: Colors.white, 
+            activeColor: Colors.white,
             iconSize: 20,
             tabBackgroundColor: Colors.green.withOpacity(1.0),
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -172,10 +191,7 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.home_outlined,
                 text: 'Página Inicial',
               ),
-              GButton(
-                icon: Icons.shopping_bag_outlined, 
-                text: 'Catálogo'
-                ),
+              GButton(icon: Icons.shopping_bag_outlined, text: 'Catálogo'),
               GButton(
                 icon: Icons.person,
                 text: 'Meu perfil',
