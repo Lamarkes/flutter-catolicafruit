@@ -1,3 +1,4 @@
+import 'package:app_catolicafruit/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,7 +66,7 @@ class _CriarContaPageState extends State<CriarContaPage> {
                 width: largura - 40,
                 height: 50,
                 child: TextField(
-                  controller: nomeController,
+                  controller: emailController,
                   decoration: InputDecoration(
                     prefixIcon:
                         Icon(Icons.alternate_email, color: Comp().corPrincipal),
@@ -83,7 +84,6 @@ class _CriarContaPageState extends State<CriarContaPage> {
                 width: largura - 40,
                 height: 50,
                 child: TextFormField(
-                  controller: emailController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.phone,
@@ -155,7 +155,7 @@ class _CriarContaPageState extends State<CriarContaPage> {
                     pref.setString(Comp().senha, senhaController.text);
 
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => LoginPage()));
                   } catch (Exception) {}
                 },
               ),
