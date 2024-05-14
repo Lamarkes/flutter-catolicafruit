@@ -1,25 +1,24 @@
+import 'package:app_catolicafruit/models/usuario_modelo.dart';
 import 'package:app_catolicafruit/pages/fale_conosco_page.dart';
-import 'package:app_catolicafruit/pages/perfil_page.dart';
-import 'package:app_catolicafruit/shared/comp.dart';
-import 'package:flutter/material.dart';
-import 'package:app_catolicafruit/models/frutas_modelo.dart';
-import 'package:app_catolicafruit/models/legumes_modelo.dart';
 import 'package:app_catolicafruit/pages/home_page.dart';
+import 'package:flutter/material.dart';
+import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class CatalogoPage extends StatefulWidget {
-  final List<Fruta> frutas;
-  final List<Legume> legumes;
-
-  const CatalogoPage({Key? key, required this.frutas, required this.legumes}) : super(key: key);
+class PerfilPage extends StatefulWidget {
+  PerfilPage({super.key});
 
   @override
-  State<CatalogoPage> createState() => _CatalogoPageState();
+  State<PerfilPage> createState() => _PerfilPageState();
 }
 
-class _CatalogoPageState extends State<CatalogoPage> {
-  int _indiceAtual = 1; 
- 
+class _PerfilPageState extends State<PerfilPage> {
+  Usuario usuario =
+      Usuario(nome: "Lamark", email: "lala@gmail.com", telefone: "44444444");
+
+  int _indiceAtual = 1;
+
   void onTabTapped(int index) {
     setState(() {
       _indiceAtual = index;
@@ -31,7 +30,7 @@ class _CatalogoPageState extends State<CatalogoPage> {
           ),
         );
       }
-      if (index == 2) {
+      if (index == 1) {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -39,7 +38,7 @@ class _CatalogoPageState extends State<CatalogoPage> {
           ),
         );
       }
-      if (index == 3) {
+      if (index == 2) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => FaleConoscoPage()),
@@ -55,43 +54,62 @@ class _CatalogoPageState extends State<CatalogoPage> {
         iconTheme: IconThemeData(
           color: Comp().corPrincipal,
         ),
+        backgroundColor: Comp().corPrincipal,
         title: Text(
-          'Catálogo',
+          "Meu Perfil",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Comp().corPrincipal,
       ),
-      body: ListView.builder(
-        itemCount: widget.frutas.length + widget.legumes.length,
-        itemBuilder: (context, index) {
-          if (index < widget.frutas.length) {
-            // Se o índice for menor que o tamanho da lista de frutas, exibe uma fruta
-            Fruta fruta = widget.frutas[index];
-            return _buildProdutoTile(
-              context,
-              nome: fruta.nome ?? 'Nome não disponível',
-              preco: fruta.preco != null ? 'Preço: R\$ ${fruta.preco!.toStringAsFixed(2)}' : 'Preço não disponível',
-              icone: Icons.add_shopping_cart_outlined,
-              onTap: () {
-                
-              },
-            );
-          } else {
-            // Caso contrário, exibe um legume
-            int legumeIndex = index - widget.frutas.length;
-            Legume legume = widget.legumes[legumeIndex];
-            return _buildProdutoTile(
-              context,
-              nome: legume.nome ?? 'Nome não disponível',
-              preco: legume.preco != null ? 'Preço: R\$ ${legume.preco!.toStringAsFixed(2)}' : 'Preço não disponível',
-              icone: Icons.add_shopping_cart_outlined,
-              onTap: () {
-                
-              },
-            );
-          }
-        },
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset('images/img_perfil.png', width: 270, height: 150),
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: ListTile(
+                leading: Icon(
+                  Icons.person_outline,
+                  color: Comp().corPrincipal,
+                  size: 30,
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                tileColor: Color.fromRGBO(246, 246, 246, 1),
+                title: Text('${usuario.nome}'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: ListTile(
+                leading: Icon(
+                  Icons.phone,
+                  color: Comp().corPrincipal,
+                  size: 30,
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                tileColor: Color.fromRGBO(246, 246, 246, 1),
+                title: Text('${usuario.telefone}'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: ListTile(
+                leading: Icon(
+                  Icons.email,
+                  color: Comp().corPrincipal,
+                  size: 30,
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                tileColor: Color.fromRGBO(246, 246, 246, 1),
+                title: Text('${usuario.email}'),
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -119,7 +137,7 @@ class _CatalogoPageState extends State<CatalogoPage> {
             duration: Duration(milliseconds: 900),
             gap: 18,
             color: Colors.green,
-            activeColor: Colors.white, 
+            activeColor: Colors.white,
             iconSize: 20,
             tabBackgroundColor: Colors.green.withOpacity(1.0),
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -129,12 +147,12 @@ class _CatalogoPageState extends State<CatalogoPage> {
                 text: 'Página Inicial',
               ),
               GButton(
-                icon: Icons.shopping_bag_outlined, 
-                text: 'Catálogo'
-              ),
-              GButton(
                 icon: Icons.person,
                 text: 'Meu perfil',
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PerfilPage()));
+                },
               ),
               GButton(
                 icon: Icons.headset_mic_outlined,
@@ -145,18 +163,6 @@ class _CatalogoPageState extends State<CatalogoPage> {
             onTabChange: onTabTapped,
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildProdutoTile(BuildContext context, {required String nome, required String preco, required IconData icone, required VoidCallback onTap}) {
-    return ListTile(
-      leading: Icon(Icons.food_bank), 
-      title: Text(nome),
-      subtitle: Text(preco),
-      trailing: IconButton(
-        icon: Icon(icone),
-        onPressed: onTap,
       ),
     );
   }

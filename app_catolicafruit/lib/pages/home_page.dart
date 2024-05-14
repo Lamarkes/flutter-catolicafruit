@@ -1,8 +1,10 @@
 import 'package:app_catolicafruit/models/frutas_modelo.dart';
 import 'package:app_catolicafruit/models/legumes_modelo.dart';
 import 'package:app_catolicafruit/pages/catalogo_page.dart';
+import 'package:app_catolicafruit/pages/fale_conosco_page.dart';
 import 'package:app_catolicafruit/pages/listagem_produtos_page.dart';
 import 'package:app_catolicafruit/pages/login_page.dart';
+import 'package:app_catolicafruit/pages/perfil_page.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -30,6 +32,20 @@ class _HomePageState extends State<HomePage> {
             builder: (context) => CatalogoPage(
                 frutas: frutasDisponiveis, legumes: legumesDisponiveis),
           ),
+        );
+      }
+      if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PerfilPage(),
+          ),
+        );
+      }
+      if (index == 3) {
+        Navigator.push(
+          context, 
+          MaterialPageRoute(builder: (context) => FaleConoscoPage()),
         );
       }
     });
@@ -195,6 +211,10 @@ class _HomePageState extends State<HomePage> {
               GButton(
                 icon: Icons.person,
                 text: 'Meu perfil',
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PerfilPage()));
+                },
               ),
               GButton(
                 icon: Icons.headset_mic_outlined,
