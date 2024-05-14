@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var largura = MediaQuery.of(context).size.width;
-    
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -104,11 +104,11 @@ class _HomePageState extends State<HomePage> {
             ],
             curve: Curves.easeOutExpo,
             duration: Duration(milliseconds: 900),
-            gap: 8,
+            gap: 18,
             color: Colors.green, // Alterado para branco
-            activeColor: Colors.green, // Alterado para verde
+            activeColor: Colors.white, // Alterado para verde
             iconSize: 24,
-            tabBackgroundColor: Colors.white.withOpacity(0.1),
+            tabBackgroundColor: Colors.green.withOpacity(1.5),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             tabs: [
               GButton(
