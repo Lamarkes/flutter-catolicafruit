@@ -1,3 +1,5 @@
+import 'package:app_catolicafruit/pages/fale_conosco_page.dart';
+import 'package:app_catolicafruit/pages/perfil_page.dart';
 import 'package:app_catolicafruit/shared/comp.dart';
 import 'package:flutter/material.dart';
 import 'package:app_catolicafruit/models/frutas_modelo.dart';
@@ -29,6 +31,20 @@ class _ListagemProdutosPageState extends State<ListagemProdutosPage> {
           MaterialPageRoute(
             builder: (context) => HomePage(),
           ),
+        );
+      }
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PerfilPage(),
+          ),
+        );
+      }
+      if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FaleConoscoPage()),
         );
       }
     });
@@ -108,7 +124,6 @@ class _ListagemProdutosPageState extends State<ListagemProdutosPage> {
                 icon: Icons.home_outlined,
                 text: 'Página Inicial',
               ),
-              GButton(icon: Icons.shopping_bag_outlined, text: 'Catálogo'),
               GButton(
                 icon: Icons.person,
                 text: 'Meu perfil',
