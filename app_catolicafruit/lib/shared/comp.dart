@@ -7,6 +7,6 @@ class Comp{
 
   Color corPrincipal = Color.fromRGBO(79, 220, 69,1);
 
-    String email = "email";
+  String email = "email";
   String senha = "senha";
 }
