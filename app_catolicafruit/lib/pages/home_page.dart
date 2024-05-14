@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.green, // Alterado para branco
             activeColor: Colors.white, // Alterado para verde
             iconSize: 24,
-            tabBackgroundColor: Colors.green.withOpacity(1.5),
+            tabBackgroundColor: Colors.green.withOpacity(1.0),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             tabs: [
               GButton(
@@ -120,6 +120,10 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.person,
                 text: 'Meu perfil',
               ),
+              GButton(
+                icon: Icons.headset_mic_outlined,
+                text: 'Fale Conosco',
+              )
             ],
             selectedIndex: _indiceAtual,
             onTabChange: onTabTapped,
