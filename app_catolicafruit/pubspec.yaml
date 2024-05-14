@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   shared_preferences: ^2.2.3
   cupertino_icons: ^1.0.6
+  google_nav_bar: ^5.0.6
 
 dev_dependencies:
   flutter_test:
@@ -51,3 +52,4 @@ flutter:
 
   assets:
     - images/logoPrincipal.png
+    - images/img_perfil.png
